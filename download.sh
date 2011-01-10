@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function die()
+{
+	echo "$*" >&2
+	exit 1
+}
+
+function refresh()
+{
+	rm -fr www.henryklahola.nazory.cz
+	wget \
+		--no-verbose --output-file $REPODIR/wget.log \
+		--recursive --level 64 --convert-links \
+		--reject jpg,JPG,jpeg,JPEG,mp3,MP3,gif,GIF,png,PNG,rtf,RTF,bmp,BMP \
+		http://www.henryklahola.nazory.cz/ \
+	|| die "can't download"
+}
+
+. conf/config.sh
+cd $REPODIR
+
+refresh
+git add wget.log www.henryklahola.nazory.cz
+git commit --quiet --all --message 'automatic update'
+git push origin master >/dev/null || die "unable to push"
