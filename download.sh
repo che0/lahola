@@ -12,7 +12,7 @@ function refresh()
 	wget \
 		--no-verbose --output-file $REPODIR/wget.log \
 		--recursive --level 64 --convert-links \
-		--reject jpg,JPG,jpeg,JPEG,mp3,MP3,gif,GIF,png,PNG,rtf,RTF,bmp,BMP \
+		--reject 404.html,jpg,JPG,jpeg,JPEG,mp3,MP3,gif,GIF,png,PNG,rtf,RTF,bmp,BMP,mid,MID,rmi,RMI,tit,TIT \
 		http://www.henryklahola.nazory.cz/ \
 	|| die "can't download"
 }
