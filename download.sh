@@ -21,7 +21,7 @@ function refresh()
 cd $REPODIR
 
 refresh
-sed -ri 's/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} //' wget.log
+sed -ri 's/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} //;s/^FINISHED.*$/FINISHED/;s/^Downloaded:(.*)in .*$/Downloaded:\1/' wget.log
 git add wget.log www.henryklahola.nazory.cz
 git commit --quiet --all --message 'automatic update'
 git push origin master >/dev/null 2>&1 || die "unable to push"
