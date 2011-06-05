@@ -25,5 +25,10 @@ find www.henryklahola.nazory.cz -type f | xargs python nowz.py
 [ "$1" = "-r" ] && exit 0
 
 git add www.henryklahola.nazory.cz
-git commit --quiet --all --message 'automatic update'
+
+diff="$(mktemp)"
+echo "automatic update:" > "${diff}"
+git diff --no-color --stat >> "${diff}"
+git commit --quiet --all --file "${diff}"
+rm -f "${diff}"
 git push origin master >/dev/null 2>&1 || die "unable to push"
