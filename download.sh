@@ -34,7 +34,7 @@ cd $REPODIR
 
 curl --head http://www.henryklahola.nazory.cz/ 2>/dev/null | grep ^ETag: > etag.new
 etag_changed=$(diff etag etag.new 2>&1 | wc -l)
-rm etag.new
+mv etag.new etag
 
 if [ ! "$FORCE" -a "$etag_changed" -eq 0 ]
 then
