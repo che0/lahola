@@ -2,7 +2,7 @@
 
 import sys, re
 
-WZ_RE = re.compile(r'<!--WZ-REKLAMA-1.0IZ-->.*<!--WZ-REKLAMA-1.0IK-->', re.DOTALL)
+WZ_RE = re.compile(r'<!--WZ-REKLAMA-1.0IZ-->.*<!--WZ-REKLAMA-1.0IK-->|<!--wz-lista-[^>]+--><script[^\n]*</script>', re.DOTALL)
 
 def cleanup(filename):
 	f = open(filename, 'rb')
