@@ -10,7 +10,7 @@ function refresh()
 {
 	rm -fr www.henryklahola.nazory.cz
 	httrack --single-log --mirror --update --store-all-in-cache -O recent,cache \
-		--footer "Mirrored from host %s file %s" \
+		--footer "<!-- Mirrored from %s/%s -->" \
 		http://www.henryklahola.nazory.cz \
 		'-*' +'www.henryklahola.nazory.cz/*.htm' +'www.henryklahola.nazory.cz/*.html' \
 	|| die "can't download"
