@@ -14,6 +14,7 @@ function refresh()
 		'-*' +'www.henryklahola.nazory.cz/*.htm' +'www.henryklahola.nazory.cz/*.html' \
 	|| die "can't download"
 	cp -R recent/www.henryklahola.nazory.cz www.henryklahola.nazory.cz
+	find www.henryklahola.nazory.cz -name '*.tmp' -exec rm '{}' \;
 }
 
 [ "$1" == "--force" ] && FORCE=1
