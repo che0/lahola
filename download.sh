@@ -8,21 +8,14 @@ function die()
 
 function refresh()
 {
+	httrack http://www.henryklahola.nazory.cz -O www.henryklahola.nazory.cz,cache
+	return
+
 	rm -fr www.henryklahola.nazory.cz
 	wget \
 		--output-file $REPODIR/wget.log \
 		--recursive --level 64 --convert-links --max-redirect 0 \
-		--reject jpg,JPG,jpeg,JPEG,mp3,MP3,gif,GIF,png,PNG,rtf,RTF,bmp,BMP,mid,MID,rmi,RMI,tit,TIT \
-		http://www.henryklahola.nazory.cz/ \
-	|| die "can't download"
-}
-
-function index()
-{
-	wget \
-		--convert-links --max-redirect 0 \
-		--reject jpg,JPG,jpeg,JPEG,mp3,MP3,gif,GIF,png,PNG,rtf,RTF,bmp,BMP,mid,MID,rmi,RMI,tit,TIT \
-		--directory-prefix ${INDEX_DIR} \
+		--reject jpg,JPG,jpeg,JPEG,mp3,MP3,gif,GIF,png,PNG,rtf,RTF,bmp,BMP,mid,MID,rmi,RMI,tit,TIT,*U%C5%BEite%C4%8Dn%C3%A9%20tipy%20Po%C5%99ad%C3%AD%20titul%C5%AF%20-%20www_lidovky_cz_soubory* \
 		http://www.henryklahola.nazory.cz/ \
 	|| die "can't download"
 }
