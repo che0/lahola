@@ -9,7 +9,7 @@ function die()
 function refresh()
 {
 	rm -fr www.henryklahola.nazory.cz
-	httrack --single-log --mirror --update --store-all-in-cache -O recent,cache \
+	httrack --do-not-log --mirror --update --store-all-in-cache -O recent,cache \
 		--footer "<!-- Mirrored from %s%s -->" \
 		http://www.henryklahola.nazory.cz \
 		'-*' +'www.henryklahola.nazory.cz/*.htm' +'www.henryklahola.nazory.cz/*.html' \
@@ -33,7 +33,15 @@ then
 fi
 
 refresh
+
+# do source sanitization
 find www.henryklahola.nazory.cz -type f | xargs python nowz.py
+if [ -f www.henryklahola.nazory.cz/Poradi.html ]; then
+	c='s/src="[^"]\+"/src=""/'
+	sed -i "235${c};253${c}" www.henryklahola.nazory.cz/Poradi.html
+fi
+
+# commit part
 [ "$1" = "-r" ] && exit 0
 
 git add www.henryklahola.nazory.cz
