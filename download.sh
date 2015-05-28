@@ -13,8 +13,8 @@ function refresh()
 		--footer "<!-- Mirrored from %s%s -->" \
 		http://www.henryklahola.nazory.cz \
 		'-*' +'www.henryklahola.nazory.cz/*.htm' +'www.henryklahola.nazory.cz/*.html' \
-		2>&1 | egrep -v '^(Done\.|Thanks for using HTTrack!)$' \
-	|| die "can't download"
+		2>&1 | egrep -v '^(Done\.|Thanks for using HTTrack!)$'
+	[ ${PIPESTATUS[0]} -eq 0 ] || die "can't download"
 	cp -R recent/www.henryklahola.nazory.cz www.henryklahola.nazory.cz
 	find www.henryklahola.nazory.cz -name '*.tmp' -exec rm '{}' \;
 }
