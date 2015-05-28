@@ -13,6 +13,7 @@ function refresh()
 		--footer "<!-- Mirrored from %s%s -->" \
 		http://www.henryklahola.nazory.cz \
 		'-*' +'www.henryklahola.nazory.cz/*.htm' +'www.henryklahola.nazory.cz/*.html' \
+		2>&1 | egrep -v '^(Done\.|Thanks for using HTTrack!)$' \
 	|| die "can't download"
 	cp -R recent/www.henryklahola.nazory.cz www.henryklahola.nazory.cz
 	find www.henryklahola.nazory.cz -name '*.tmp' -exec rm '{}' \;
@@ -35,7 +36,7 @@ fi
 refresh
 
 # do source sanitization
-find www.henryklahola.nazory.cz -type f | xargs python nowz.py
+find www.henryklahola.nazory.cz -type f -print0 | xargs -0 python nowz.py
 if [ -f www.henryklahola.nazory.cz/Poradi.html ]; then
 	c='s/src="[^"]\+"/src=""/'
 	sed -i "235${c};253${c}" www.henryklahola.nazory.cz/Poradi.html
